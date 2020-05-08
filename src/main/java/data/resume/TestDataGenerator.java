@@ -10,14 +10,10 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalField;
-import java.time.temporal.TemporalUnit;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.Date;
 
 public class TestDataGenerator {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres";
@@ -56,7 +52,7 @@ public class TestDataGenerator {
 
     private static final Random r = new Random();
     private static int idProfile = 0;
-    private static Date birthDay = null;
+    private static LocalDate birthDay = null;
 
     public static void main(String[] args) throws IOException, SQLException {
         clearMediaDIR();
@@ -191,9 +187,9 @@ public class TestDataGenerator {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into practical values (nextval('practical_id_seq'),?,?,?,?,?,?,?,?)");
         for (Course course : profileConfig.courses) {
             preparedStatement.setString(1, course.company);
-            Date finish = randomFinishEducation();
-            LocalDate begin = addField(finish, Calendar.YEAR, -5, true);
-            preparedStatement.setDate(2, java.sql.Date.valueOf(begin));
+            LocalDate finish = randomFinishEducation();
+            LocalDate begin = minusDate(finish, ChronoUnit.YEARS, 5, true);
+            preparedStatement.setDate(2, Date.valueOf(begin));
             preparedStatement.setString(3, course.responsibilities);
             if (course.demo == null) {
                 preparedStatement.setNull(4, Types.VARCHAR);
@@ -205,10 +201,10 @@ public class TestDataGenerator {
             } else {
                 preparedStatement.setString(5, course.github);
             }
-            if (finish.getTime() > System.currentTimeMillis()) {
+            if (finish.isAfter(LocalDate.now())) {
                 preparedStatement.setNull(6, Types.DATE);
             } else {
-                preparedStatement.setDate(6, new java.sql.Date(finish.getTime()));
+                preparedStatement.setDate(6, Date.valueOf(finish));
             }
             preparedStatement.setLong(7, idProfile);
             preparedStatement.setString(8, course.name);
@@ -244,11 +240,11 @@ public class TestDataGenerator {
             PreparedStatement ps = connection.prepareStatement("insert into course values (nextval('course_id_seq'),?,?,?,?)");
             ps.setString(1, "Java Advanced Course");
             ps.setString(2, "SourceIt");
-            Date finish = randomFinishEducation();
-            if (finish.getTime() > System.currentTimeMillis()) {
+            LocalDate finish = randomFinishEducation();
+            if (finish.isAfter(LocalDate.now())) {
                 ps.setNull(3, Types.DATE);
             } else {
-                ps.setDate(3, new java.sql.Date(finish.getTime()));
+                ps.setDate(3, Date.valueOf(finish));
             }
             ps.setLong(4, idProfile);
             ps.executeUpdate();
@@ -321,17 +317,14 @@ public class TestDataGenerator {
 
     private static void insertEducation(Connection connection) throws SQLException, IOException {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into education values (nextval('education_id_seq'),?,?,?,?,?,?)");
-
         preparedStatement.setString(1, "The specialist degree in Electronic Engineering");
-        Date finish = randomFinishEducation();
-        LocalDate begin = addField(finish, Calendar.YEAR, -5, true);
+        LocalDate finish = randomFinishEducation();
+        LocalDate begin = minusDate(finish, ChronoUnit.YEARS, 5, true);
         preparedStatement.setInt(2, begin.getYear());
-        if (finish.getTime() > System.currentTimeMillis()) {
+        if (finish.isAfter(LocalDate.now())) {
             preparedStatement.setNull(3, Types.INTEGER);
         } else {
-            preparedStatement.setInt(3, finish.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate().getYear());
+            preparedStatement.setInt(3, finish.getYear());
         }
         preparedStatement.setString(4, "Kharkiv National Technical University, Ukraine");
         preparedStatement.setString(5, "Computer Science");
@@ -340,28 +333,17 @@ public class TestDataGenerator {
         preparedStatement.close();
     }
 
-    private static LocalDate addField(Date finish, int field, int value, boolean isBeginEducation) {
-        Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(finish.getTime());
-        cl.add(field, value);
+    private static LocalDate minusDate(LocalDate finish, ChronoUnit field, int value, boolean isBeginEducation) {
+        LocalDate localDate = finish.minus(value, field);
         if (isBeginEducation) {
-            cl.set(Calendar.DAY_OF_MONTH, 1);
-            cl.set(Calendar.MONTH, Calendar.SEPTEMBER);
+            localDate = LocalDate.of(localDate.getYear(), 9, 1);
         }
-        TimeZone tz = cl.getTimeZone();
-        ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
-        LocalDate localDate = LocalDateTime.ofInstant(cl.toInstant(), zid).toLocalDate();
         return localDate;
     }
 
-    private static Date randomFinishEducation() {
-        Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(birthDay.getTime());
-        cl.set(Calendar.DAY_OF_MONTH, 30);
-        cl.set(Calendar.MONTH, Calendar.JUNE);
-        int year = cl.get(Calendar.YEAR) + 21;
-        cl.set(Calendar.YEAR, year + r.nextInt(3));
-        return new Date(cl.getTimeInMillis());
+    private static LocalDate randomFinishEducation() {
+        int year = birthDay.getYear() + 21;
+        return LocalDate.of(year + r.nextInt(3), 7, 30);
     }
 
     private static void insertCertificates(Connection connection, ProfileConfig profileConfig, List<Certificate> certificates) throws SQLException, IOException {
@@ -398,7 +380,7 @@ public class TestDataGenerator {
         preparedStatement.setString(5, SITIES[r.nextInt(SITIES.length)]);
         preparedStatement.setString(6, COUNTRY);
         birthDay = randomBirthDay();
-        preparedStatement.setDate(7, new java.sql.Date(birthDay.getTime()));
+        preparedStatement.setDate(7, Date.valueOf(birthDay));
         preparedStatement.setString(8, generatePhone());
         preparedStatement.setString(9, profileConfig.objective);
         preparedStatement.setString(10, profileConfig.summary);
@@ -451,9 +433,8 @@ public class TestDataGenerator {
         idProfile++;
     }
 
-    private static Date randomBirthDay() {
-        Calendar calendar = new GregorianCalendar((1990 + r.nextInt(10)), r.nextInt(12), r.nextInt(30));
-        return new Date(calendar.getTimeInMillis());
+    private static LocalDate randomBirthDay() {
+        return LocalDate.of((1990 + r.nextInt(10)), r.nextInt(11) + 1, r.nextInt(29) + 1);
     }
 
     private static String generatePhone() {

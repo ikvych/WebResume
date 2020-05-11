@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="profile" scope="request" type="ikvych.resume.entity.Profile"/>
+
 <div class="card " style="margin-top: 1em">
     <div class="card-body">
         <div class="row">
@@ -8,25 +11,34 @@
             </div>
             <div class="col-md-9 col-12">
                 <ul class="timeline">
-                    <li>
-                        <div class="timeline-badge warning">
-                            <i class="fa fa-graduation-cap"></i>
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">Java Advanced Course at DevStudy.net</h4>
-                                <p>
-                                    <small class="dates"><i class="fa fa-calendar"></i> 2004 - 2009</small>
-                                </p>
+                    <c:forEach var="education" items="${profile.educations}">
+                        <li>
+                            <div class="timeline-badge warning">
+                                <i class="fa fa-graduation-cap"></i>
                             </div>
-                            <div class="timeline-body">
-                                <p>
-                                    Computer Science, Kharkiv National Technical University, Ukraine
-                                </p>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">${education.summary }</h4>
+                                    <p>
+                                        <small class="dates"><i class="fa fa-calendar"></i>
+                                                ${education.beginYear } -
+                                            <c:choose>
+                                                <c:when test="${education.finishYear <= education.currentDate.year}">
+                                                    ${education.finishYear }
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <strong class="label label-danger">Current</strong>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>${education.faculty }, ${education.university }</p>
+                                </div>
                             </div>
-
-                        </div>
-                    </li>
+                        </li>
+                    </c:forEach>
                 </ul>
 
             </div>

@@ -3,6 +3,7 @@ package ikvych.resume.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "practical")
@@ -24,7 +25,10 @@ public class Practical implements Serializable {
     private String company;
 
     @Column(name = "begin_date", nullable = false)
-    private Date beginDate;
+    private LocalDate beginDate;
+
+    @Column(name = "finish_date", nullable = false)
+    private LocalDate finishDate;
 
     @Column(name = "responsibilities", length = 2147483647, nullable = false)
     private String responsibilities;
@@ -34,6 +38,9 @@ public class Practical implements Serializable {
 
     @Column(name = "src")
     private String src;
+
+    @Transient
+    private LocalDate currentDate = LocalDate.now();
 
     public Long getId() {
         return id;
@@ -67,12 +74,20 @@ public class Practical implements Serializable {
         this.company = company;
     }
 
-    public Date getBeginDate() {
+    public void setBeginDate(LocalDate beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public LocalDate getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
+    public LocalDate getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
     }
 
     public String getResponsibilities() {
@@ -97,5 +112,13 @@ public class Practical implements Serializable {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
     }
 }

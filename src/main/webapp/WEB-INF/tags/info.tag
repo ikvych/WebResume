@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag pageEncoding="UTF-8" language="java" %>
+<jsp:useBean id="profile" scope="request" type="ikvych.resume.entity.Profile"/>
 
 
 <div class="card " style="margin-top: 1em">
@@ -13,7 +14,9 @@
             <div class="col-md-9 col-12">
                 <div class="card-body p-2">
                     <div class="card-text ">
-                        <p>Some very important info about this person on my first resume site</p>
+                        <p>${profile.city}, ${profile.country}</p>
+                        <p>Age:${profile.age}, BirthDay:${profile.birthDay}</p>
+                        <p>${profile.info}</p>
                     </div>
                 </div>
             </div>

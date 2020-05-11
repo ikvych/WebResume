@@ -20,11 +20,26 @@ public class Course implements Serializable {
     @Column(name = "name", nullable = false, length = 60)
     private String name;
 
-    @Column(name = "school", nullable = false, length = 60)
-    private String school;
+    @Column(name = "organization", nullable = false, length = 60)
+    private String organization;
 
     @Column(name = "finish_date")
     private LocalDate finishDate;
+
+    @Column(name = "begin_date")
+    private LocalDate beginDate;
+
+    @Column(name = "demo")
+    private String demo;
+
+    @Column(name = "src")
+    private String src;
+
+    @Column(name = "description")
+    private String description;
+
+    @Transient
+    private LocalDate currentDate = LocalDate.now();
 
     public Long getId() {
         return id;
@@ -50,12 +65,12 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public String getSchool() {
-        return school;
+    public String getOrganization() {
+        return organization;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     public LocalDate getFinishDate() {
@@ -64,5 +79,45 @@ public class Course implements Serializable {
 
     public void setFinishDate(LocalDate finishDate) {
         this.finishDate = finishDate;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public LocalDate getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(LocalDate beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public String getDemo() {
+        return demo;
+    }
+
+    public void setDemo(String demo) {
+        this.demo = demo;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

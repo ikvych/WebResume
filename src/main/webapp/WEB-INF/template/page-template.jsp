@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/media/fav/favicon.ico" type="image/x-icon">
     <title>WebResume</title>
     <jsp:include page="../section/css.jsp" />
 </head>

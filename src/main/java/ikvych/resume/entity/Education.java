@@ -2,6 +2,7 @@ package ikvych.resume.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "education")
@@ -30,6 +31,9 @@ public class Education implements Serializable {
 
     @Column(name = "faculty", nullable = false)
     private String faculty;
+
+    @Transient
+    private LocalDate currentDate = LocalDate.now();
 
     public Long getId() {
         return id;
@@ -85,5 +89,13 @@ public class Education implements Serializable {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
     }
 }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag pageEncoding="UTF-8" language="java" %>
+<jsp:useBean id="profile" scope="request" type="ikvych.resume.entity.Profile"/>
 
 <div class="card mb-3">
 
@@ -11,31 +12,49 @@
             </div>
             <div class="col-md-9 col-12">
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <h6><i class="fa fa-phone contacts"></i> +380952144815 </h6>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h6><i class="fa fa-envelope contacts"></i> ikvuch@gmail.com </h6>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h6><i class="fa fa-skype contacts"></i> ivankvych</h6>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <a href="www.linkedin.com/in/diana-r/"><h6><i class="fa fa-linkedin contacts"></i>
-                            www.linkedin.com/in/diana-r/ </h6></a>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <a href="http:\\github.com/ikvych"><h6><i class="fa fa-github contacts"></i> github.com/ikvych
-                        </h6>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h6><i class="fa fa-stack-overflow contacts"></i> ru.stackoverflow.com/ </h6>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h6><i class="fa fa-facebook contacts"></i> www.facebook.com/jhon.kvych</h6>
-                    </div>
+                    <c:if test="${profile.phone != null}">
+                        <div class="col-12 col-md-4">
+                            <h6><i class="fa fa-phone contacts"></i> ${profile.phone} </h6>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.email != null}">
+                        <div class="col-12 col-md-4">
+                            <h6><i class="fa fa-envelope contacts"></i> ${profile.email} </h6>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.contacts.skype != null}">
+                        <div class="col-12 col-md-4">
+                            <h6><i class="fa fa-skype contacts"></i> ${profile.contacts.skype}</h6>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.contacts.linkedin != null}">
+                        <div class="col-12 col-md-4">
+                            <a href="https://${profile.contacts.linkedin}"><h6><i class="fa fa-linkedin contacts"></i>
+                                    ${profile.contacts.linkedin} </h6></a>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.contacts.github != null}">
+                        <div class="col-12 col-md-4">
+                            <a href="https://${profile.contacts.github}">
+                                <h6><i class="fa fa-github contacts"></i> ${profile.contacts.github} </h6>
+                            </a>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.contacts.stackoverflow != null}">
+                        <div class="col-12 col-md-4">
+                            <a href="https://${profile.contacts.stackoverflow}">
+                                <h6><i class="fa fa-stack-overflow contacts"></i> ${profile.contacts.stackoverflow}
+                                </h6>
+                            </a>
+                        </div>
+                    </c:if>
+                    <c:if test="${profile.contacts.facebook != null}">
+                        <div class="col-12 col-md-4">
+                            <a href="https://${profile.contacts.facebook}">
+                                <h6><i class="fa fa-facebook contacts"></i> ${profile.contacts.facebook}</h6>
+                            </a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>

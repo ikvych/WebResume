@@ -28,10 +28,10 @@ public class TestDataGenerator {
     private static final String[] FOREGIN_LANGUAGE = {"Spanish", "German", "French", "Italian"};
     private static final String PASSWORD_HASH = "$2a$10$q7732w6Rj3kZGhfDYSIXI.wFp.uwTSi2inB2rYHvm1iDIAf1J1eVq";
 
-    private static final String[] HOBBIES = { "Cycling", "Handball", "Football", "Basketball", "Bowling", "Boxing", "Volleyball", "Baseball", "Skating", "Skiing", "Table tennis", "Tennis",
+    private static final String[] HOBBIES = {"Cycling", "Handball", "Football", "Basketball", "Bowling", "Boxing", "Volleyball", "Baseball", "Skating", "Skiing", "Table tennis", "Tennis",
             "Weightlifting", "Automobiles", "Book reading", "Cricket", "Photo", "Shopping", "Cooking", "Codding", "Animals", "Traveling", "Movie", "Painting", "Darts", "Fishing", "Kayak slalom",
             "Games of chance", "Ice hockey", "Roller skating", "Swimming", "Diving", "Golf", "Shooting", "Rowing", "Camping", "Archery", "Pubs", "Music", "Computer games", "Authorship", "Singing",
-            "Foreign lang", "Billiards", "Skateboarding", "Collecting", "Badminton", "Disco" };
+            "Foreign lang", "Billiards", "Skateboarding", "Collecting", "Badminton", "Disco"};
 
     private static final List<LanguageLevel> languageLevels = new ArrayList<>(EnumSet.allOf(LanguageLevel.class));
     private static final List<LanguageType> languageTypes = new ArrayList<>(EnumSet.allOf(LanguageType.class));
@@ -67,7 +67,7 @@ public class TestDataGenerator {
                 createProfile(connection, profile, profileConfig, certificates);
                 System.out.println("Created profile for " + profile.firstName + " " + profile.lastName);
             }
-/*            insertSkillCategories(connection);*/
+            /*            insertSkillCategories(connection);*/
             connection.commit();
             System.out.println("DataBase generated successful");
         }
@@ -109,7 +109,7 @@ public class TestDataGenerator {
     private static void clearDataBase(Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("delete from profile");
-/*        statement.executeUpdate("delete from skill_category");*/
+        /*        statement.executeUpdate("delete from skill_category");*/
         statement.executeQuery("select setval('profile_id_seq', 1, false)");
         statement.executeQuery("select setval('hobby_id_seq', 1, false)");
         statement.executeQuery("select setval('certificate_id_seq', 1, false)");
@@ -158,28 +158,28 @@ public class TestDataGenerator {
     private static List<ProfileConfig> getProfileConfigs() {
         List<ProfileConfig> res = new ArrayList<>();
         res.add(new ProfileConfig("Junior java trainee position",
-                "Java core course with developing one simple console application", new Course[] { Course.createCoreCourse() }, 0));
+                "Java core course with developing one simple console application", new Course[]{Course.createCoreCourse()}, 0));
 
         res.add(new ProfileConfig("Junior java trainee position",
                 "One Java professional course with developing web application blog (Link to demo is provided)",
-                new Course[] { Course.createBaseCourse() }, 0));
+                new Course[]{Course.createBaseCourse()}, 0));
 
         res.add(new ProfileConfig("Junior java developer position",
                 "One Java professional course with developing web application resume (Link to demo is provided)",
-                new Course[] { Course.createAdvancedCourse() }, 0));
+                new Course[]{Course.createAdvancedCourse()}, 0));
         res.add(new ProfileConfig("Junior java developer position", "One Java professional course with developing web application resume (Link to demo is provided)",
-                new Course[] { Course.createAdvancedCourse() }, 1));
+                new Course[]{Course.createAdvancedCourse()}, 1));
         res.add(new ProfileConfig("Junior java developer position", "Two Java professional courses with developing two web applications: blog and resume (Links to demo are provided)",
-                new Course[] { Course.createAdvancedCourse(), Course.createBaseCourse() }, 1));
+                new Course[]{Course.createAdvancedCourse(), Course.createBaseCourse()}, 1));
         res.add(new ProfileConfig("Junior java developer position", "Two Java professional courses with developing two web applications: blog and resume (Links to demo are provided)",
-                new Course[] { Course.createAdvancedCourse(), Course.createBaseCourse() }, 1));
+                new Course[]{Course.createAdvancedCourse(), Course.createBaseCourse()}, 1));
         res.add(new ProfileConfig("Junior java developer position", "Two Java professional courses with developing two web applications: blog and resume (Links to demo are provided)",
-                new Course[] { Course.createAdvancedCourse(), Course.createBaseCourse() }, 1));
+                new Course[]{Course.createAdvancedCourse(), Course.createBaseCourse()}, 1));
         res.add(new ProfileConfig("Junior java developer position", "Two Java professional courses with developing two web applications: blog and resume (Links to demo are provided)",
-                new Course[] { Course.createAdvancedCourse(), Course.createBaseCourse() }, 2));
+                new Course[]{Course.createAdvancedCourse(), Course.createBaseCourse()}, 2));
         res.add(new ProfileConfig("Junior java developer position",
                 "Three Java professional courses with developing one console application and two web applications: blog and resume (Links to demo are provided)",
-                new Course[] { Course.createAdvancedCourse(), Course.createBaseCourse(), Course.createCoreCourse() }, 2));
+                new Course[]{Course.createAdvancedCourse(), Course.createBaseCourse(), Course.createCoreCourse()}, 2));
         return res;
     }
 
@@ -237,16 +237,17 @@ public class TestDataGenerator {
 
     private static void insertCourses(Connection connection) throws SQLException {
         if (r.nextBoolean()) {
-            PreparedStatement ps = connection.prepareStatement("insert into course values (nextval('course_id_seq'),?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into course values (nextval('course_id_seq'),?,?,?,?,?,?,?,?)");
             ps.setString(1, "Java Advanced Course");
             ps.setString(2, "SourceIt");
-            LocalDate finish = randomFinishEducation();
-            if (finish.isAfter(LocalDate.now())) {
-                ps.setNull(3, Types.DATE);
-            } else {
-                ps.setDate(3, Date.valueOf(finish));
-            }
+            LocalDate finish = randomFinishCourses();
+            ps.setDate(3, Date.valueOf(finish));
             ps.setLong(4, idProfile);
+            LocalDate begin = minusDate(finish, ChronoUnit.MONTHS, 5, true);
+            ps.setDate(5, Date.valueOf(begin));
+            ps.setString(6, "http://LINK_TO_DEMO");
+            ps.setString(7, "http://LINK_TO_SRC");
+            ps.setString(8, "Developing the web application 'blog' using free HTML template, downloaded from intenet. Populating database by test data and uploading web project to OpenShift free hosting");
             ps.executeUpdate();
             ps.close();
         }
@@ -346,6 +347,11 @@ public class TestDataGenerator {
         return LocalDate.of(year + r.nextInt(3), 7, 30);
     }
 
+    private static LocalDate randomFinishCourses() {
+        LocalDate finishCoureDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        return finishCoureDate;
+    }
+
     private static void insertCertificates(Connection connection, ProfileConfig profileConfig, List<Certificate> certificates) throws SQLException, IOException {
         Collections.shuffle(certificates);
         PreparedStatement preparedStatement = connection.prepareStatement("insert into certificate values (nextval('certificate_id_seq'),?,?,?,?)");
@@ -359,7 +365,7 @@ public class TestDataGenerator {
             }
             Files.copy(Paths.get(certificate.largeImg), Paths.get(largePhoto.getAbsolutePath()));
 
-            preparedStatement.setString(2, "media/certificates/" + largeUid);
+            preparedStatement.setString(2, "/media/certificates/" + largeUid);
 
             String smallUid = largeUid.replace(".jpg", "-small.jpg");
             Thumbnails.of(largePhoto).size(110, 110).toFile(new File(MEDIA_DIR + "/certificates/" + smallUid));
@@ -390,14 +396,13 @@ public class TestDataGenerator {
             largePhoto.getParentFile().mkdirs();
         }
         Files.copy(Paths.get(profile.photo), Paths.get(largePhoto.getAbsolutePath()));
-        preparedStatement.setString(11, "media/avatar/" + uid);
+        preparedStatement.setString(11, "/media/avatar/" + uid);
         String smallUid = uid.replace(".jpg", "-small.jpg");
         Thumbnails.of(largePhoto).size(200, 200).toFile(new File(MEDIA_DIR + "/avatar/" + smallUid));
-        preparedStatement.setString(12, "media/avatar/" + smallUid);
+        preparedStatement.setString(12, "/media/avatar/" + smallUid);
         if (r.nextBoolean()) {
             preparedStatement.setString(13, getInfo());
-        }
-        else {
+        } else {
             preparedStatement.setNull(13, Types.VARCHAR);
         }
         preparedStatement.setString(14, PASSWORD_HASH);

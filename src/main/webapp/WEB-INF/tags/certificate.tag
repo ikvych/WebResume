@@ -11,7 +11,7 @@
             <div class="col-md-9 col-12">
                 <div class="card-group">
                     <a data-url="media/certificates/4fe5c927-fef8-4c43-ad89-4027f59b2d71-sm.jpg" data-title="Jee certificate" href="#" class="thumbnail certificate-link">
-                        <img alt="Jee certificate" src="media/certificates/2c23aae2-5938-478d-9e0b-c75a3a954af9-small.jpg" class="img-responsive"><br/> <span>Jee certificate</span>
+                        <img alt="Jee certificate" src="/media/certificates/2c23aae2-5938-478d-9e0b-c75a3a954af9-small.jpg" class="img-responsive"><br/> <span>Jee certificate</span>
                     </a>
                 </div>
             </div>

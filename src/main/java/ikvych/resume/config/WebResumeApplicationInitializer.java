@@ -2,6 +2,7 @@ package ikvych.resume.config;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -29,6 +30,7 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
 
     public void registerFilters(ServletContext servletContext, WebApplicationContext context) {
         registerFilter(servletContext, buildConfigurableSiteMeshFilter(), "sitemesh");
+        registerFilter(servletContext, new OpenEntityManagerInViewFilter());
     }
 
     public void registerFilter(ServletContext servletContext, Filter filter, String... filters) {

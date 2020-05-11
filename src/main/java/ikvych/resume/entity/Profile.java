@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 
 @Entity
@@ -97,6 +98,9 @@ public class Profile implements Serializable {
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private List<Course> courses;
+
+    @Transient
+    private Integer age;
 
     public Long getId() {
         return id;
@@ -296,5 +300,9 @@ public class Profile implements Serializable {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    public Integer getAge() {
+        return Period.between(birthDay, LocalDate.now()).getYears();
     }
 }

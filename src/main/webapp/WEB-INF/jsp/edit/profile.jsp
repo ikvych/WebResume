@@ -11,13 +11,28 @@
             <div class="card border-top-0">
                 <form:form action="/edit/profile" method="post" modelAttribute="profile">
                     <div class="card-body">
+                        <form:hidden path="firstName"/>
+                        <form:hidden path="lastName"/>
+                        <form:hidden path="id"/>
+                        <form:hidden path="uid"/>
+                        <form:hidden path="largePhoto"/>
                         <h4 class="card-title text-center"
-                            style="margin-top: 10px; margin-bottom: 20px">${profile.firstName} ${profile.lastName}</h4>
+                                               style="margin-top: 10px; margin-bottom: 20px">${profile.firstName} ${profile.lastName}</h4>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <img id="" src="${profile.largePhoto }" class="edit-photo"/><br/>
-                                    <input type="file" name="profilePhoto" id="inputPhoto"/>
+                                    <div class="form-row">
+                                        <input id="originPhoto" type="text" hidden="hidden" name="profilePhoto"
+                                               value="${profile.largePhoto }"/>
+                                        <div class="image-preview" id="imagePreview">
+                                            <img src="${profile.largePhoto }" alt="Image Preview"
+                                                 class="image-preview__image" style="max-width: 100%">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row" style="margin-bottom: 20px">
+                                        <input type="file" name="profilePhoto" id="inpFile"/>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 help-block">
@@ -38,13 +53,14 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="InputBirthDay">BirthDay</label>
-                                    <form:input path="birthDay" type="text" class="form-control" id="InputBirthDay"
-                                                required="required"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="birthDay" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <form:input path="birthDay" value="${profile.birthDay}" type="date"
+                                                class="form-control" id="InputBirthDay"
+                                                />
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="birthDay" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -61,11 +77,11 @@
                                 <div class="form-group">
                                     <label for="InputCountry">Country</label>
                                     <form:input path="country" type="text" class="form-control" id="InputCountry"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="country" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="country" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputCity">City</label>
@@ -175,31 +191,34 @@
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">A few words about yourself that will showcase
-                                    your strengths.</label>
-                                <form:textarea path="info" class="form-control" id="exampleFormControlTextarea1"
-                                               rows="3"/>
-                                <div class="row ">
-                                    <div class="col-12">
-                                        <form:errors path="info" cssClass="alert alert-danger" element="div"/>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">A few words about yourself that will
+                                        showcase
+                                        your strengths.</label>
+                                    <form:textarea path="info" class="form-control" id="exampleFormControlTextarea1"
+                                                   rows="3"/>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="info" cssClass="alert alert-danger" element="div"/>
+                                        </div>
                                     </div>
                                 </div>
+                                <blockquote>
+                                    Укажите дополнительную информацию, которая действительно важна работодателю.
+                                    Например:<br/>
+                                    <i>Наличие открытой визы в иностранное государство, семейное положение, если женат и
+                                        есть дети, реальный опыт в деятельности, которая может быть Вашей предметной
+                                        областью
+                                        при разработке програмного обеспечения, возможно опыт исследовательской работы в
+                                        НИИ
+                                        и т.д. </i><br/>
+                                    НЕ стоит указывать ваши личностные качества, почти все кандидаты ответственные,
+                                    комуникабельные и порядочные)))<br/>
+                                </blockquote>
                             </div>
-                            <blockquote>
-                                Укажите дополнительную информацию, которая действительно важна работодателю.
-                                Например:<br/>
-                                <i>Наличие открытой визы в иностранное государство, семейное положение, если женат и
-                                    есть дети, реальный опыт в деятельности, которая может быть Вашей предметной
-                                    областью
-                                    при разработке програмного обеспечения, возможно опыт исследовательской работы в НИИ
-                                    и т.д. </i><br/>
-                                НЕ стоит указывать ваши личностные качества, почти все кандидаты ответственные,
-                                комуникабельные и порядочные)))<br/>
-                            </blockquote>
                         </div>
-                        </div>
+
 
                         <input type="submit" class="btn btn-dark" value="Save">
                     </div>
@@ -208,3 +227,4 @@
         </div>
     </div>
 </div>
+

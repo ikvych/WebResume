@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-3 col-12" style="margin-bottom: 2%">
                 <div class="btn-group">
-                    <i class="fa fa-graduation-cap fa-2x" style="color: #727272"></i><a class="text-dark" style="margin-left: 1em" href="/edit/education"><h4> Education</h4></a>
+                    <i class="fa fa-graduation-cap fa-2x" style="color: #727272"></i><a class="text-dark" style="margin-left: 1em" href="/edit/educations"><h4> Education</h4></a>
                 </div>
             </div>
             <div class="col-md-9 col-12">

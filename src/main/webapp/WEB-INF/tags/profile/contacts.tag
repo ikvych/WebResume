@@ -8,7 +8,9 @@
 
         <div class="row  p-1">
             <div class="col-md-3 col-12" style="margin-bottom: 2%">
-                <h4><i class="fa fa-address-book fa-lg" style="color: #727272" aria-hidden="true"></i> Contacts</h4>
+                <div class="btn-group">
+                    <i class="fa fa-address-book fa-2x" style="color: #727272"></i><a class="text-dark" style="margin-left: 1em" href="/edit/contacts"><h4> Contacts</h4></a>
+                </div>
             </div>
             <div class="col-md-9 col-12">
                 <div class="row">

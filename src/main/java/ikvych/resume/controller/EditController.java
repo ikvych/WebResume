@@ -1,15 +1,19 @@
 package ikvych.resume.controller;
 
 import ikvych.resume.entity.Contacts;
+import ikvych.resume.entity.Profile;
 import ikvych.resume.form.*;
 import ikvych.resume.service.EditProfileService;
 import ikvych.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 public class EditController {
@@ -22,12 +26,26 @@ public class EditController {
 
     @RequestMapping(value = "/edit/profile", method = RequestMethod.GET)
     public String getProfile(Model model) {
-        model.addAttribute("profile", findProfileService.findProfileById(5L));
+        model.addAttribute("profile", findProfileService.findProfileById(6L));
         return "edit/profile";
     }
 
     @RequestMapping(value = "/edit/profile", method = RequestMethod.POST)
-    public String saveProfile(Model model) {
+    public String saveProfile(@Valid @ModelAttribute("profile") Profile profile, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "edit/profile";
+        }
+        return "redirect:/carla-walton";
+    }
+
+    @RequestMapping(value = "/edit/contacts", method = RequestMethod.GET)
+    public String getContacts(Model model) {
+        model.addAttribute("contacts", findProfileService.findProfileById(6L).getContacts());
+        return "edit/contacts";
+    }
+
+    @RequestMapping(value = "/edit/contacts", method = RequestMethod.POST)
+    public String saveContacts(@ModelAttribute("contacts") Contacts contacts, Model model) {
         return "redirect:/carla-walton";
     }
 
@@ -100,17 +118,6 @@ public class EditController {
 
     @RequestMapping(value = "/edit/courses", method = RequestMethod.POST)
     public String saveCourses(@ModelAttribute("courses") CourseForm courses, Model model) {
-        return "redirect:/carla-walton";
-    }
-
-    @RequestMapping(value = "/edit/contacts", method = RequestMethod.GET)
-    public String getContacts(Model model) {
-        model.addAttribute("contacts", findProfileService.findProfileById(6L).getContacts());
-        return "edit/contacts";
-    }
-
-    @RequestMapping(value = "/edit/contacts", method = RequestMethod.POST)
-    public String saveContacts(@ModelAttribute("contacts") Contacts contacts, Model model) {
         return "redirect:/carla-walton";
     }
 

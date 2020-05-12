@@ -1,6 +1,13 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.Adulthood;
+import ikvych.resume.annotation.constraints.Phone;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,18 +33,24 @@ public class Profile implements Serializable {
     private String lastName;
 
     @Column(name = "birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Adulthood
     private LocalDate birthDay;
 
     @Column(name = "phone", unique = true, length = 20)
+    @Phone
     private String phone;
 
     @Column(name = "email", unique = true, length = 100)
+    @Email
     private String email;
 
     @Column(name = "country", length = 60)
+    @Size(max=60)
     private String country;
 
     @Column(name = "city", length = 100)
+    @Size(max=60)
     private String city;
 
     @Column(name = "objective", length = 2147483647)
@@ -47,9 +60,11 @@ public class Profile implements Serializable {
     private String summary;
 
     @Column(name = "large_photo")
+    @Size(max=255)
     private String largePhoto;
 
     @Column(name = "small_photo")
+    @Size(max=255)
     private String smallPhoto;
 
     @Column(name = "info", length = 2147483647)

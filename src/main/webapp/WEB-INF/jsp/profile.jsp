@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="resume" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="resume" tagdir="/WEB-INF/tags/profile" %>
 
 <div class="container-xl container-fluid p-0">
         <resume:main/>

@@ -2,9 +2,10 @@ package ikvych.resume.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class Contacts {
+public class Contacts implements Serializable {
 
     @Column(name = "skype", length = 80)
     private String skype;
@@ -20,6 +21,9 @@ public class Contacts {
 
     @Column(name = "stackoverflow")
     private String stackoverflow;
+
+    public Contacts() {
+    }
 
     public String getSkype() {
         return skype;

@@ -7,6 +7,8 @@ import ikvych.resume.service.FindProfileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,6 +39,11 @@ public class FindProfileServiceImpl implements FindProfileService {
             LOGGER.error(msg, ex);
             return ex;
         });
+    }
+
+    @Override
+    public Page<Profile> findAll(Pageable pageable) {
+        return profileRepository.findAll(pageable);
     }
 
 }

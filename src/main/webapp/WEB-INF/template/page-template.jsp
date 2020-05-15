@@ -11,7 +11,7 @@
 </head>
 <body>
 <section class="container-xl container-fluid p-0">
-<jsp:include page="../section/header.jsp" />
+    <jsp:include page="../section/header.jsp" />
 </section>
 <jsp:include page="../section/nav.jsp" />
 <section class="container-xl container-fluid p-0">

@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/sign-in-failed");
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/welcome")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
         http.rememberMe()

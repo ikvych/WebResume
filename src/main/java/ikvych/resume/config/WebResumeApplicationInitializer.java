@@ -31,9 +31,9 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
 
     public void registerFilters(ServletContext servletContext, WebApplicationContext context) {
         registerFilter(servletContext, new CharacterEncodingFilter("UTF-8", true));
-        registerFilter(servletContext, buildConfigurableSiteMeshFilter(), "sitemesh");
         registerFilter(servletContext, new DelegatingFilterProxy("springSecurityFilterChain", context), "springSecurityFilterChain");
         registerFilter(servletContext, new OpenEntityManagerInViewFilter());
+        registerFilter(servletContext, buildConfigurableSiteMeshFilter(), "sitemesh");
     }
 
     public void registerFilter(ServletContext servletContext, Filter filter, String... filters) {
@@ -60,6 +60,7 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
                 builder.addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp")
+                        .addDecoratorPath("/fragment/*", "/WEB-INF/template/load-more-template.jsp")
                         .addTagRuleBundle(new Sm2TagRuleBundle());
             }
         };

@@ -21,6 +21,13 @@ public class ProfileController {
     @Autowired
     private FindProfileService profileService;
 
+    @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+    public String getProfile(@PathVariable("uid") String uid, Model model) {
+        Profile profile = profileService.findProfileByUid(uid);
+        model.addAttribute("profile", profile);
+        return "profile";
+    }
+
     @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
     public String getProfile(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         Profile profile = profileService.findProfileById(currentUser.getId());

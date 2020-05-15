@@ -62,6 +62,41 @@ function showErrorDialog (message) {
     alert(message);
 }
 
+function moreProfiles () {
+    var page = parseInt($('#profileContainer').attr('data-profile-number')) + 1;
+    var total= parseInt($('#profileContainer').attr('data-profile-total'));
+    if (page >= total) {
+        $('#loadMoreIndicator').remove();
+        $('#loadMoreContainer').remove();
+        return;
+    }
+    var url = '/fragment/more?page=' + page;
+/*    if(searchQuery !== undefined && searchQuery.trim() !== '') {
+        url += '&query='+searchQuery;
+    }*/
+
+    $('#loadMoreContainer').css('display', 'none');
+    $('#loadMoreIndicator').css('display', 'block');
+    $.ajax({
+        url : url,
+        success : function(data) {
+            $('#loadMoreIndicator').css('display', 'none');
+            $('#profileContainer').append(data);
+            $('#profileContainer').attr('data-profile-number', page);
+            if (page >= total-1) {
+                $('#loadMoreIndicator').remove();
+                $('#loadMoreContainer').remove();
+            } else {
+                $('#loadMoreContainer').css('display', 'block');
+            }
+        },
+        error : function(data) {
+            console.log(data);
+            showErrorDialog('Ось така хуйня малята');
+        }
+    });
+}
+
 function addCertificate() {
     var certificateName = $('#certificateName').val();
     //https://www.tjvantoll.com/2012/08/05/html5-form-validation-showing-all-error-messages/

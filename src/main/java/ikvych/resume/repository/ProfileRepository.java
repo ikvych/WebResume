@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ProfileRepository extends CrudRepository<Profile, Long> {
 
     Optional<Profile> findByUid(String uid);
+
+    Profile findByUidOrEmailOrPhone(String uid, String email, String phone);
 }

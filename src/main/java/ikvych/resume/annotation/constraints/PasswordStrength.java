@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Size(min = 8)
 public @interface PasswordStrength {
 
-    String messages() default "PasswordStrength";
+    String message() default "PasswordStrength";
 
     Class<?>[] groups() default {};
 

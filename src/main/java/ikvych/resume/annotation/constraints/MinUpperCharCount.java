@@ -12,9 +12,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = {MinUpperCharCountConstraintValidator.class})
 public @interface MinUpperCharCount {
 
-    String messages() default "MinUpperCharCount";
+    String message() default "MinUpperCharCount";
 
-    int minCount() default 1;
+    int minCount() default 0;
 
     Class<?>[] groups() default {};
 

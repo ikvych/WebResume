@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = {MinLowerCharCountConstraintValidator.class})
 public @interface MinLowerCharCount {
 
-    String messages() default "MinLoverCharCount";
+    String message() default "MinLoverCharCount";
 
     int minCount() default 1;
 

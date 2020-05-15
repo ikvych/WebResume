@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
-public class StaticDataServiceImpl implements StaticDataService, UserDetailsService {
+public class StaticDataServiceImpl implements StaticDataService {
 
     private final Set<Hobby> allHobbies;
 
@@ -59,11 +59,6 @@ public class StaticDataServiceImpl implements StaticDataService, UserDetailsServ
     @Override
     public Set<Hobby> listAllHobbies() {
         return allHobbies;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
     }
 
     protected static final class HobbyReadOnlyEntity extends Hobby {

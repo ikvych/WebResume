@@ -1,9 +1,11 @@
 package ikvych.resume.controller;
 
 import ikvych.resume.entity.Profile;
+import ikvych.resume.model.CurrentUser;
 import ikvych.resume.repository.ProfileRepository;
 import ikvych.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -19,9 +21,9 @@ public class ProfileController {
     @Autowired
     private FindProfileService profileService;
 
-    @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
-    public String getProfile(@PathVariable("uid") String uid, Model model) {
-        Profile profile = profileService.findProfileByUid(uid);
+    @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
+    public String getProfile(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        Profile profile = profileService.findProfileById(currentUser.getId());
         model.addAttribute("profile", profile);
         return "profile";
     }

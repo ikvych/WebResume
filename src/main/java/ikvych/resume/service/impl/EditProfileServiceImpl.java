@@ -2,6 +2,7 @@ package ikvych.resume.service.impl;
 
 import ikvych.resume.entity.*;
 import ikvych.resume.exception.NoSuchEntityException;
+import ikvych.resume.form.SignUpForm;
 import ikvych.resume.repository.*;
 import ikvych.resume.service.EditProfileService;
 import ikvych.resume.service.StaticDataService;
@@ -40,6 +41,20 @@ public class EditProfileServiceImpl implements EditProfileService {
 
     @Autowired
     private CertificateRepository certificateRepository;
+
+    @Autowired
+    private ProfileRepository profileRepository;
+
+    @Override
+    public Profile createNewProfile(SignUpForm signUpForm) {
+        Profile profile = new Profile();
+        profile.setFirstName(signUpForm.getFirstName());
+        profile.setLastName(signUpForm.getLastName());
+        profile.setPassword(signUpForm.getPassword());
+        profile.setUid(signUpForm.getFirstName().toLowerCase() + "-" + signUpForm.getLastName().toLowerCase());
+        profile = profileRepository.save(profile);
+        return profile;
+    }
 
     @Override
     public List<Practical> findAllPracticalByProfileId(Long profileId) {

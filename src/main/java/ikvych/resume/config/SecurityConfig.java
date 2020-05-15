@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/my-profile", "/edit", "/edit/**", "/remove").hasAuthority(Constants.USER)
+                .antMatchers("/my-profile", "/edit", "/edit/**").hasAuthority(Constants.USER)
                 .anyRequest().permitAll();
         http.formLogin()
                 .loginPage("/sign-in")
@@ -40,13 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/sign-in-failed");
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/welcome")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
-/*        http.rememberMe()
+        http.rememberMe()
                 .rememberMeParameter("remember-me")
-                .rememberMeServices(persistentTokenRememberMeService);
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
+                .key("web-resume")
+                .tokenRepository(persistentTokenRepository());
         http.csrf().disable();
     }
 

@@ -1,10 +1,14 @@
 package ikvych.resume.service;
 
 import ikvych.resume.entity.*;
+import ikvych.resume.form.SignUpForm;
+import ikvych.resume.model.CurrentUser;
 
 import java.util.List;
 
 public interface EditProfileService {
+
+    Profile createNewProfile(SignUpForm signUpForm);
 
     List<Practical> findAllPracticalByProfileId(Long profileId);
 

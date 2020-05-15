@@ -14,9 +14,15 @@
             <div class="col-md-9 col-12">
                 <div class="card-body p-2">
                     <div class="card-text ">
+                        <c:if test="${profile.city != null && profile.country != null}">
                         <p>${profile.city}, ${profile.country}</p>
+                        </c:if>
+                        <c:if test="${profile.age != null && profile.birthDay != null}">
                         <p>Age:${profile.age}, BirthDay:${profile.birthDay}</p>
+                        </c:if>
+                        <c:if test="${profile.info != null}">
                         <p>${profile.info}</p>
+                        </c:if>
                     </div>
                 </div>
             </div>

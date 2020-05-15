@@ -12,9 +12,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = {MinDigitCountConstraintValidator.class})
 public @interface MinDigitCount {
 
-    String messages() default "MinDigitCount";
+    String message() default "MinDigitCount";
 
-    int minCount() default 1;
+    int minCount() default 0;
 
     Class<?>[] groups() default {};
 

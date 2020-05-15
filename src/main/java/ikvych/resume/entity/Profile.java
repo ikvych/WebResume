@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -74,7 +75,7 @@ public class Profile implements Serializable {
     private String password;
 
     @Column(name = "completed", nullable = false)
-    private Boolean completed;
+    private boolean completed;
 
     @Column(name = "created", insertable = false)
     private LocalDateTime created;
@@ -90,29 +91,29 @@ public class Profile implements Serializable {
     private Contacts contacts;
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Certificate> certificates;
+    private List<Certificate> certificates = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("finishYear DESC, beginYear DESC, id DESC")
-    private List<Education> educations;
+    private List<Education> educations = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("name ASC")
-    private List<Hobby> hobbies;
+    private List<Hobby> hobbies = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Language> languages;
+    private List<Language> languages = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("beginDate DESC")
-    private List<Practical> practicals;
+    private List<Practical> practicals = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("id ASC")
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
 
     @Transient
     private Integer age;
@@ -237,11 +238,11 @@ public class Profile implements Serializable {
         this.password = password;
     }
 
-    public Boolean getCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
@@ -318,6 +319,9 @@ public class Profile implements Serializable {
     }
 
     public Integer getAge() {
-        return Period.between(birthDay, LocalDate.now()).getYears();
+        if (birthDay != null) {
+            return Period.between(birthDay, LocalDate.now()).getYears();
+        }
+        return null;
     }
 }

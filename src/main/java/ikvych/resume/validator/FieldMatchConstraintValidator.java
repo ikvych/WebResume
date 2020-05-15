@@ -22,8 +22,19 @@ public class FieldMatchConstraintValidator implements ConstraintValidator<FieldM
         try {
             Object firstValue  = BeanUtils.getPropertyDescriptor(value.getClass(), first).getReadMethod().invoke(value);
             Object secondValue = BeanUtils.getPropertyDescriptor(value.getClass(), second).getReadMethod().invoke(value);
-            return (firstValue == null && secondValue == null) || (firstValue != null && firstValue.equals(secondValue));
+            if ((firstValue == null && secondValue == null) || (firstValue != null && firstValue.equals(secondValue))) {
+                return true;
+            }
+            context.buildConstraintViolationWithTemplate("Паролі повинні співпадати")
+                    .addPropertyNode(first)
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+            return false;
         } catch (Exception ignore) {
+            context.buildConstraintViolationWithTemplate("Паролі повинні співпадати")
+                    .addPropertyNode(first)
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
             return false;
         }
     }

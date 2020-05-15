@@ -32,6 +32,7 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
     public void registerFilters(ServletContext servletContext, WebApplicationContext context) {
         registerFilter(servletContext, new CharacterEncodingFilter("UTF-8", true));
         registerFilter(servletContext, buildConfigurableSiteMeshFilter(), "sitemesh");
+        registerFilter(servletContext, new DelegatingFilterProxy("springSecurityFilterChain", context), "springSecurityFilterChain");
         registerFilter(servletContext, new OpenEntityManagerInViewFilter());
     }
 

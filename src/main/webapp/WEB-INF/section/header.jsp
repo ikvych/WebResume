@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <i class="d-inline-block align-top fa fa-address-book-o fa-lg"></i>
         Bootstrap
     </a>

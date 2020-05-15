@@ -12,9 +12,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = {MinSpechCharCountConstraintValidator.class})
 public @interface MinSpechCharCount {
 
-    String messages() default "MinSpechCharCount";
+    String message() default "MinSpechCharCount";
 
-    int minValue() default 1;
+    int minValue() default 0;
 
     String spechSymbols() default "!@~`#$%^&*()_-+=|\\/{}[].,;:/?";
 

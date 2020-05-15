@@ -32,6 +32,10 @@
                         <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm">
                         <form:errors path="passwordConfirm" cssClass="alert alert-danger" element="div"/>
                     </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="rememberMe" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
                     <div class="form-row d-flex justify-content-between">
                         <button type="submit" class="btn btn-success">Submit</button>
                         <button type="submit" class="btn btn-primary">Sign-up with Facebook</button>

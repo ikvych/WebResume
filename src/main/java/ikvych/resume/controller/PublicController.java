@@ -56,7 +56,11 @@ public class PublicController {
             return "sign-up";
         }
         Profile profile = editProfileService.createNewProfile(signUpForm);
-        SecurityUtil.authenticate(profile);
+        if (signUpForm.getRememberMe()) {
+            SecurityUtil.authenticateWithRememberMe(profile);
+        } else {
+            SecurityUtil.authenticate(profile);
+        }
         return "redirect:/my-profile";
     }
 

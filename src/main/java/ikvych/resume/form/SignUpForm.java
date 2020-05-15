@@ -23,6 +23,7 @@ public class SignUpForm {
     @PasswordStrength(message = "Недостатньо надійний пароль")
     private String password;
     private String passwordConfirm;
+    private Boolean rememberMe;
 
     public String getFirstName() {
         return firstName;
@@ -54,5 +55,13 @@ public class SignUpForm {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public Boolean getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

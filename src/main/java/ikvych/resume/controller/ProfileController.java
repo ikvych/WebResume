@@ -2,6 +2,7 @@ package ikvych.resume.controller;
 
 import ikvych.resume.entity.Profile;
 import ikvych.resume.model.CurrentUser;
+import ikvych.resume.model.CurrentUserImpl;
 import ikvych.resume.repository.ProfileRepository;
 import ikvych.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
-    public String getProfile(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+    public String myProfile(@AuthenticationPrincipal CurrentUserImpl currentUser, Model model) {
         Profile profile = profileService.findProfileById(currentUser.getId());
         model.addAttribute("profile", profile);
         return "profile";

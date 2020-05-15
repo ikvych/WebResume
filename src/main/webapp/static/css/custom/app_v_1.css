@@ -1,0 +1,300 @@
+@charset "UTF-8";
+
+/* @font-face kit by Fonts2u (http://www.fonts2u.com) for font http://www.fontspace.com/alan-carr/sports-and-hobbies */
+@font-face {
+    font-family: "Sports and Hobbies";
+    src: url("../../fonts/sporthob.eot?") format("eot"), url("../../fonts/sporthob.woff") format("woff"), url("../../fonts/sporthob.ttf") format("truetype"), url("../../fonts/sporthob.svg#SportsAndHobbies")
+    format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.userPhoto {
+    max-width: 100%;
+    margin-top: -70%;
+    border-color: white;
+    border-style: groove;
+}
+
+.userName {
+/*    margin-top: -8%;*/
+    color: #ffffff;
+    font-family: Helvetica, Arial, sans-serif;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8), 0px 0px 2px  rgba(0,0,0,1);
+}
+
+.userName-md {
+    color: #1d2124;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.userPhotoCol {
+    padding: 0;
+/*    margin-left: 5%;*/
+}
+
+.contacts {
+    color: #0c5460;
+    padding-left: 5px;
+}
+
+.hobbies {
+    text-align: center;
+}
+
+.hobbies i {
+    font-size: 1.8em;
+    margin: 0 5px;
+    color: #767270;
+}
+
+.hobbies .table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+
+.hobby.hobby-cycling::before {
+    content: "\f206"
+}
+
+.hobby.hobby-handball::before {
+    font-family: "Sports and Hobbies";
+    content: "!"
+}
+
+.hobby.hobby-football::before {
+    font-family: "Sports and Hobbies";
+    content: "#"
+}
+
+.hobby.hobby-basketball::before {
+    font-family: "Sports and Hobbies";
+    content: "U"
+}
+
+.hobby.hobby-bowling::before {
+    font-family: "Sports and Hobbies";
+    content: ")"
+}
+
+.hobby.hobby-boxing::before {
+    font-family: "Sports and Hobbies";
+    content: "J"
+}
+
+.hobby.hobby-volleyball::before {
+    font-family: "Sports and Hobbies";
+    content: "'"
+}
+
+.hobby.hobby-baseball::before {
+    font-family: "Sports and Hobbies";
+    content: "O"
+}
+
+.hobby.hobby-skating::before {
+    font-family: "Sports and Hobbies";
+    content: "@"
+}
+
+.hobby.hobby-skiing::before {
+    font-family: "Sports and Hobbies";
+    content: "D"
+}
+
+.hobby.hobby-table-tennis::before {
+    font-family: "Sports and Hobbies";
+    content: "4"
+}
+
+.hobby.hobby-tennis::before {
+    font-family: "Sports and Hobbies";
+    content: "2"
+}
+
+.hobby.hobby-weightlifting::before {
+    font-family: "Sports and Hobbies";
+    content: "L"
+}
+
+.hobby.hobby-cricket::before {
+    font-family: "Sports and Hobbies";
+    content: "%"
+}
+
+.hobby.hobby-automobiles::before {
+    content: "\f1b9"
+}
+
+.hobby.hobby-book-reading::before {
+    content: "\f02d"
+}
+
+.hobby.hobby-photo::before {
+    content: "\f030"
+}
+
+.hobby.hobby-shopping:before {
+    content: "\f290"
+}
+
+.hobby.hobby-cooking:before {
+    content: "\f0f5"
+}
+
+.hobby.hobby-codding:before {
+    content: "\f121"
+}
+
+.hobby.hobby-animals:before {
+    content: "\f1b0"
+}
+
+.hobby.hobby-traveling:before {
+    content: "\f0f2"
+}
+
+.hobby.hobby-movie:before {
+    content: "\f26c"
+}
+
+.hobby.hobby-painting:before {
+    content: "\f1fc"
+}
+
+.hobby.hobby-darts::before {
+    font-family: "Sports and Hobbies";
+    content: "b"
+}
+
+.hobby.hobby-fishing::before {
+    font-family: "Sports and Hobbies";
+    content: "f"
+}
+
+.hobby.hobby-kayak-slalom::before {
+    font-family: "Sports and Hobbies";
+    content: "\f012"
+}
+
+.hobby.hobby-games-of-chance::before {
+    font-family: "Sports and Hobbies";
+    content: "x"
+}
+
+.hobby.hobby-ice-hockey::before {
+    font-family: "Sports and Hobbies";
+    content: "P"
+}
+
+.hobby.hobby-roller-skating::before {
+    font-family: "Sports and Hobbies";
+    content: "A"
+}
+
+.hobby.hobby-swimming::before {
+    font-family: "Sports and Hobbies";
+    content: "I"
+}
+
+.hobby.hobby-diving::before {
+    font-family: "Sports and Hobbies";
+    content: "<"
+}
+
+.hobby.hobby-golf::before {
+    font-family: "Sports and Hobbies";
+    content: "8"
+}
+
+.hobby.hobby-shooting::before {
+    font-family: "Sports and Hobbies";
+    content: "]"
+}
+
+.hobby.hobby-rowing::before {
+    font-family: "Sports and Hobbies";
+    content: "u"
+}
+
+.hobby.hobby-camping::before {
+    font-family: "Sports and Hobbies";
+    content: "d"
+}
+
+.hobby.hobby-archery::before {
+    font-family: "Sports and Hobbies";
+    content: "^"
+}
+
+.hobby.hobby-pubs::before {
+    content: "\f0fc"
+}
+
+.hobby.hobby-music::before {
+    content: "\f001"
+}
+
+.hobby.hobby-computer-games::before {
+    content: "\f11b"
+}
+
+.hobby.hobby-authorship::before {
+    content: "\f11c"
+}
+
+.hobby.hobby-foreign-lang::before {
+    content: "\f1ab"
+}
+
+.hobby.hobby-singing::before {
+    content: "\f130"
+}
+
+.hobby.hobby-billiards::before {
+    font-family: "Sports and Hobbies";
+    content: "-"
+}
+
+.hobby.hobby-skateboarding::before {
+    font-family: "Sports and Hobbies";
+    content: "W"
+}
+
+.hobby.hobby-collecting::before {
+    content: "\f1c5"
+}
+
+.hobby.hobby-badminton::before {
+    font-family: "Sports and Hobbies";
+    content: "."
+}
+
+
+
+.hobby.hobby-disco::before {
+    content: "\f0c0"
+}
+
+ .hobby-btn {
+    text-align: left;
+    font-size: 20px;
+    margin: 5px 0;
+    position: relative;
+    padding-left: 50px;
+}
+
+ .hobby-btn i {
+    position: absolute;
+    left: 10px;
+    font-size: 1.3em;
+    top: 8px;
+    text-align: center;
+    width: 30px;
+}
+
+ .btn.hobby-btn.active, .resume .btn.hobby-btn:active {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+    color: white;
+}

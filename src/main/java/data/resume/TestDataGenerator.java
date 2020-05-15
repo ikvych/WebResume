@@ -408,7 +408,7 @@ public class TestDataGenerator {
         preparedStatement.setString(14, PASSWORD_HASH);
         preparedStatement.setDate(15, new java.sql.Date(System.currentTimeMillis()));
         if (r.nextBoolean()) {
-            preparedStatement.setString(16, "facebook.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
+            preparedStatement.setString(16, "https://facebook.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
         } else {
             preparedStatement.setNull(16, Types.VARCHAR);
         }
@@ -418,17 +418,17 @@ public class TestDataGenerator {
             preparedStatement.setNull(17, Types.VARCHAR);
         }
         if (r.nextBoolean()) {
-            preparedStatement.setString(18, "linkedin.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
+            preparedStatement.setString(18, "https://linkedin.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
         } else {
             preparedStatement.setNull(18, Types.VARCHAR);
         }
         if (r.nextBoolean()) {
-            preparedStatement.setString(19, "stackoverflow.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
+            preparedStatement.setString(19, "https://stackoverflow.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
         } else {
             preparedStatement.setNull(19, Types.VARCHAR);
         }
         if (r.nextBoolean()) {
-            preparedStatement.setString(20, "github.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
+            preparedStatement.setString(20, "https://github.com/" + (profile.firstName + "-" + profile.lastName).toLowerCase());
         } else {
             preparedStatement.setNull(20, Types.VARCHAR);
         }

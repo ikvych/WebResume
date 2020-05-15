@@ -4,32 +4,33 @@ import ikvych.resume.validator.FirstFieldLessThanSecondConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({ TYPE, ANNOTATION_TYPE })
+@Retention(RUNTIME)
+@Constraint(validatedBy = FirstFieldLessThanSecondConstraintValidator.class)
 @Documented
-@Constraint(validatedBy = {FirstFieldLessThanSecondConstraintValidator.class})
 public @interface FirstFieldLessThanSecond {
+	String message() default "FirstFieldLessThanSecond";
 
-    String message() default "FirstFieldLessThanSecond";
+	Class<?>[] groups() default {};
 
-    Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	String first();
 
-    String first();
+	String second();
 
-    String second();
-
-    @Target({ TYPE, ANNOTATION_TYPE })
-    @Retention(RUNTIME)
-    @Documented
-    @interface List {
-        ikvych.resume.annotation.constraints.FirstFieldLessThanSecond[] value();
-    }
+	@Target({ TYPE, ANNOTATION_TYPE })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		FirstFieldLessThanSecond[] value();
+	}
 }

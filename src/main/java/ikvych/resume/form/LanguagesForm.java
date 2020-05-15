@@ -3,10 +3,12 @@ package ikvych.resume.form;
 import ikvych.resume.entity.Language;
 import ikvych.resume.entity.Skill;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
 
 public class LanguagesForm implements Serializable {
+    @Valid
     private List<Language> items;
 
     public LanguagesForm() {

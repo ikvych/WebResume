@@ -1,5 +1,7 @@
 package ikvych.resume.model;
 
+import java.beans.PropertyEditorSupport;
+
 public enum LanguageType {
     ALL,
     WRITING,
@@ -17,5 +19,18 @@ public enum LanguageType {
         } else {
             throw new IllegalArgumentException(this + " does not have reverse type");
         }
+    }
+
+    public String getCaption() {
+        return name();
+    }
+
+    public static PropertyEditorSupport getPropertyEditor(){
+        return new PropertyEditorSupport(){
+            @Override
+            public void setAsText(String dbValue) throws IllegalArgumentException {
+                setValue(LanguageType.valueOf(dbValue.toUpperCase()));
+            }
+        };
     }
 }

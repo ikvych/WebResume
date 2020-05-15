@@ -1,11 +1,20 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.FirstYearMonthBeforeSecondYearMonth;
+import ikvych.resume.convertor.YearMonthDateAttributeConverter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 @Entity
 @Table(name = "course")
+@FirstYearMonthBeforeSecondYearMonth(first = "beginDate", second = "finishDate")
 public class Course implements Serializable {
 
     @Id
@@ -18,16 +27,27 @@ public class Course implements Serializable {
     private Profile profile;
 
     @Column(name = "name", nullable = false, length = 60)
+    @NotNull
+    @NotBlank
+    @Size(max = 100)
     private String name;
 
     @Column(name = "organization", nullable = false, length = 60)
+    @NotNull
+    @NotBlank
+    @Size(max = 100)
     private String organization;
 
-    @Column(name = "finish_date")
-    private LocalDate finishDate;
+    @Column(name = "begin_date", nullable = false, columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM")
+    @Convert(converter = YearMonthDateAttributeConverter.class)
+    @NotNull
+    private YearMonth beginDate;
 
-    @Column(name = "begin_date")
-    private LocalDate beginDate;
+    @Column(name = "finish_date", columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM")
+    @Convert(converter = YearMonthDateAttributeConverter.class)
+    private YearMonth finishDate;
 
     @Column(name = "demo")
     private String demo;
@@ -36,10 +56,12 @@ public class Course implements Serializable {
     private String src;
 
     @Column(name = "description")
+    @NotNull
+    @NotBlank
     private String description;
 
     @Transient
-    private LocalDate currentDate = LocalDate.now();
+    private YearMonth currentDate = YearMonth.now();
 
     public Long getId() {
         return id;
@@ -73,27 +95,27 @@ public class Course implements Serializable {
         this.organization = organization;
     }
 
-    public LocalDate getFinishDate() {
+    public YearMonth getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(LocalDate finishDate) {
+    public void setFinishDate(YearMonth finishDate) {
         this.finishDate = finishDate;
     }
 
-    public LocalDate getCurrentDate() {
+    public YearMonth getCurrentDate() {
         return currentDate;
     }
 
-    public void setCurrentDate(LocalDate currentDate) {
+    public void setCurrentDate(YearMonth currentDate) {
         this.currentDate = currentDate;
     }
 
-    public LocalDate getBeginDate() {
+    public YearMonth getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(LocalDate beginDate) {
+    public void setBeginDate(YearMonth beginDate) {
         this.beginDate = beginDate;
     }
 

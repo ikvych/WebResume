@@ -25,10 +25,11 @@
                                     <h4 class="timeline-title">${practic.position } at ${practic.company }</h4>
                                     <p>
                                         <small class="dates"><i class="fa fa-calendar"></i>
-                                            <javatime:format value="${practic.beginDate}" pattern="MMM yyyy" /> -
+                                            <strong>Date:</strong>
+                                            <javatime:format value="${practic.beginDate}" pattern="yyyy-MM" /> -
                                             <c:choose>
                                                 <c:when test="${practic.finishDate.isBefore(practic.currentDate)}">
-                                                    <javatime:format value="${practic.finishDate}" pattern="MMM yyyy" />
+                                                    <javatime:format value="${practic.finishDate}" pattern="yyyy-MM" />
                                                 </c:when>
                                                 <c:otherwise>
                                                     <strong class="label label-danger">Current</strong>

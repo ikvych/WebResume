@@ -23,11 +23,11 @@
                                     <h4 class="timeline-title">${course.name } at ${course.organization }</h4>
                                     <p>
                                         <small class="dates"><i class="fa fa-calendar"></i>
-                                            <strong>Finish Date:</strong>
-                                            <javatime:format value="${course.beginDate}" pattern="MMM yyyy" /> -
+                                            <strong>Date:</strong>
+                                            <javatime:format value="${course.beginDate}" pattern="yyyy-MM" /> -
                                             <c:choose>
                                                 <c:when test="${course.finishDate.isBefore(course.currentDate)}">
-                                                    <javatime:format value="${course.finishDate}" pattern="MMM yyyy" />
+                                                    <javatime:format value="${course.finishDate}" pattern="yyyy-MM" />
                                                 </c:when>
                                                 <c:otherwise>
                                                     <strong class="label label-danger">Not finished yet</strong>

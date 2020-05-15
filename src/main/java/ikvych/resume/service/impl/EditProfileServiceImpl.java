@@ -4,16 +4,21 @@ import ikvych.resume.entity.*;
 import ikvych.resume.exception.NoSuchEntityException;
 import ikvych.resume.repository.*;
 import ikvych.resume.service.EditProfileService;
+import ikvych.resume.service.StaticDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EditProfileServiceImpl implements EditProfileService {
     private final Logger LOGGER = LoggerFactory.getLogger(EditProfileServiceImpl.class);
+
+    @Autowired
+    private StaticDataService staticDataService;
 
     @Autowired
     private PracticalRepository practicalRepository;
@@ -68,12 +73,18 @@ public class EditProfileServiceImpl implements EditProfileService {
 
     @Override
     public List<Hobby> findAllHobbyByProfileId(Long profileId) {
-        return hobbyRepository.findAllByProfileId(profileId).orElseThrow(() -> {
+        List<Hobby> profileHobbies = hobbyRepository.findAllByProfileId(profileId).orElseThrow(() -> {
             String msg = String.format("Can't find hobby list by profileId: %d", profileId);
             NoSuchEntityException ex = new NoSuchEntityException(msg);
             LOGGER.error(msg, ex);
             return ex;
         });
+        List<Hobby> hobbies = new ArrayList<>();
+        for (Hobby h : staticDataService.listAllHobbies()) {
+            boolean selected = profileHobbies.contains(h);
+            hobbies.add(new Hobby(h.getName(), selected));
+        }
+        return hobbies;
     }
 
     @Override

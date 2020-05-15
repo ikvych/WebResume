@@ -3,10 +3,12 @@ package ikvych.resume.form;
 import ikvych.resume.entity.Course;
 import ikvych.resume.entity.Education;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
 
 public class CourseForm implements Serializable {
+    @Valid
     private List<Course> items;
 
     public CourseForm() {

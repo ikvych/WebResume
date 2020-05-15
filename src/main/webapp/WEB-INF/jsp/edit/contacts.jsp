@@ -21,11 +21,11 @@
                                 <div class="form-group">
                                     <label for="InputSkype">Skype</label>
                                     <form:input path="skype" type="text" class="form-control" id="InputSkype"/>
-<%--                                    <div class="row " >
+                                    <div class="row " >
                                         <div class="col-12">
                                             <form:errors path="skype" cssClass="alert alert-danger" element="div" />
                                         </div>
-                                    </div>--%>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -42,38 +42,38 @@
                                 <div class="form-group">
                                     <label for="InputFacebook">Facebook</label>
                                     <form:input path="facebook" type="text" class="form-control" id="InputFacebook"/>
-<%--                                    <div class="row " >
+                                    <div class="row " >
                                         <div class="col-12">
                                             <form:errors path="facebook" cssClass="alert alert-danger" element="div" />
                                         </div>
-                                    </div>--%>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputLinkedin">Linkedin</label>
                                     <form:input path="linkedin" type="text" class="form-control" id="InputLinkedin"/>
-<%--                                    <div class="row " >
+                                    <div class="row " >
                                         <div class="col-12">
                                             <form:errors path="linkedin" cssClass="alert alert-danger" element="div" />
                                         </div>
-                                    </div>--%>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputGithub">Github</label>
                                     <form:input path="github" type="text" class="form-control" id="InputGithub"/>
-<%--                                    <div class="row " >
+                                    <div class="row " >
                                         <div class="col-12">
                                             <form:errors path="github" cssClass="alert alert-danger" element="div" />
                                         </div>
-                                    </div>--%>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputStackoverflow">Stackoverflow</label>
                                     <form:input path="stackoverflow" type="text" class="form-control" id="InputStackoverflow"/>
-<%--                                    <div class="row " >
+                                    <div class="row " >
                                         <div class="col-12">
                                             <form:errors path="stackoverflow" cssClass="alert alert-danger" element="div" />
                                         </div>
-                                    </div>--%>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">

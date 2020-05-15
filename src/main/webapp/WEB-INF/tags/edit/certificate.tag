@@ -8,22 +8,17 @@
 <%@ attribute name="largeUrl" required="false" type="java.lang.String"%>
 <%@ attribute name="name"     required="false" type="java.lang.String"%>
 
-<div id="ui-item-${index }" class="thumbnail ui-item text-center" >
+<div id="edit-item-${index }" class="thumbnail edit-item text-center col-3">
     <input type="hidden" name="items[${index }].id" 		value="${id }" />
     <input type="hidden" name="items[${index }].smallUrl" 	value="${smallUrl }" />
     <input type="hidden" name="items[${index }].largeUrl" 	value="${largeUrl }" />
     <input type="hidden" name="items[${index }].name" 		value="${name }" />
 
-    <button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
+    <button type="button" class="close float-right" onclick="$('#edit-item-${index }').remove();">
         <span aria-hidden="true">&times;</span>
     </button>
     <a class="certificate-link" href="#" data-title="${name }" data-url="${largeUrl }">
-        <img class="img-responsive" style="height: 200px" src="/${largeUrl}" alt="${name }"><br/>
+        <img class="img-responsive" style="width: 100%" src="${largeUrl}" alt="${name }"><br/>
         <span>${name }</span>
-<%--        <div class="row " >
-            <div class="col-12">
-                <form:errors path="items[${index }].name" cssClass="alert alert-danger" element="div" />
-            </div>
-        </div>--%>
     </a>
 </div>

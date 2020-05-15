@@ -1,12 +1,20 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.FirstYearMonthBeforeSecondYearMonth;
+import ikvych.resume.convertor.YearMonthDateAttributeConverter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.YearMonth;
 
 @Entity
 @Table(name = "practical")
+@FirstYearMonthBeforeSecondYearMonth(first = "beginDate", second = "finishDate")
 public class Practical implements Serializable {
 
     @Id
@@ -19,28 +27,44 @@ public class Practical implements Serializable {
     private Profile profile;
 
     @Column(name = "position", nullable = false, length = 100)
+    @NotNull
+    @NotBlank
+    @Size(max=100)
     private String position;
 
     @Column(name = "company", nullable = false, length = 100)
+    @NotNull
+    @NotBlank
+    @Size(max=100)
     private String company;
 
-    @Column(name = "begin_date", nullable = false)
-    private LocalDate beginDate;
+    @Column(name = "begin_date", nullable = false, columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM")
+    @Convert(converter = YearMonthDateAttributeConverter.class)
+    @NotNull
+    private YearMonth beginDate;
 
-    @Column(name = "finish_date", nullable = false)
-    private LocalDate finishDate;
+    @Column(name = "finish_date", nullable = false, columnDefinition = "date")
+    @DateTimeFormat(pattern = "yyyy-MM")
+    @Convert(converter = YearMonthDateAttributeConverter.class)
+    private YearMonth finishDate;
 
     @Column(name = "responsibilities", length = 2147483647, nullable = false)
+    @NotNull
+    @NotBlank
+    @Size(max=255)
     private String responsibilities;
 
     @Column(name = "demo")
+    @Size(max=255)
     private String demo;
 
     @Column(name = "src")
+    @Size(max=255)
     private String src;
 
     @Transient
-    private LocalDate currentDate = LocalDate.now();
+    private YearMonth currentDate = YearMonth.now();
 
     public Long getId() {
         return id;
@@ -74,19 +98,19 @@ public class Practical implements Serializable {
         this.company = company;
     }
 
-    public void setBeginDate(LocalDate beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public LocalDate getBeginDate() {
+    public YearMonth getBeginDate() {
         return beginDate;
     }
 
-    public LocalDate getFinishDate() {
+    public void setBeginDate(YearMonth beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public YearMonth getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(LocalDate finishDate) {
+    public void setFinishDate(YearMonth finishDate) {
         this.finishDate = finishDate;
     }
 
@@ -114,11 +138,11 @@ public class Practical implements Serializable {
         this.src = src;
     }
 
-    public LocalDate getCurrentDate() {
+    public YearMonth getCurrentDate() {
         return currentDate;
     }
 
-    public void setCurrentDate(LocalDate currentDate) {
+    public void setCurrentDate(YearMonth currentDate) {
         this.currentDate = currentDate;
     }
 }

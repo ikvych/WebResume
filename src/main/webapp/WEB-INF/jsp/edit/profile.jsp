@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="resume" tagdir="/WEB-INF/tags/edit" %>
+<%@ taglib prefix="script" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
     <div class="row">
@@ -17,7 +18,7 @@
                         <form:hidden path="uid"/>
                         <form:hidden path="largePhoto"/>
                         <h4 class="card-title text-center"
-                                               style="margin-top: 10px; margin-bottom: 20px">${profile.firstName} ${profile.lastName}</h4>
+                            style="margin-top: 10px; margin-bottom: 20px">${profile.firstName} ${profile.lastName}</h4>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -52,10 +53,9 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="InputBirthDay">BirthDay</label>
+                                    <label for="birth">BirthDay</label>
                                     <form:input path="birthDay" value="${profile.birthDay}" type="date"
-                                                class="form-control" id="InputBirthDay"
-                                                />
+                                                class="form-control" id="birth"/>
                                     <div class="row ">
                                         <div class="col-12">
                                             <form:errors path="birthDay" cssClass="alert alert-danger" element="div"/>
@@ -86,11 +86,11 @@
                                 <div class="form-group">
                                     <label for="InputCity">City</label>
                                     <form:input path="city" type="text" class="form-control" id="InputCity"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="city" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="city" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -101,11 +101,11 @@
                                 <div class="form-group">
                                     <label for="InputEmail">Email</label>
                                     <form:input path="email" type="text" class="form-control" id="InputEmail"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="email" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="email" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -126,11 +126,11 @@
                                 <div class="form-group">
                                     <label for="InputTelephone">Phone number</label>
                                     <form:input path="phone" type="text" class="form-control" id="InputTelephone"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="phone" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="phone" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -150,11 +150,11 @@
                                 <div class="form-group">
                                     <label for="InputObjective">Objective</label>
                                     <form:input path="objective" type="text" class="form-control" id="InputObjective"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="objective" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="objective" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -171,11 +171,11 @@
                                     <label for="InputSummery">Summery</label>
                                     <form:textarea path="summary" type="text" class="form-control" id="InputSummery"
                                                    rows="8"/>
-                                        <%--                                    <div class="row " >
-                                                                                <div class="col-12">
-                                                                                    <form:errors path="summary" cssClass="alert alert-danger" element="div" />
-                                                                                </div>
-                                                                            </div>--%>
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <form:errors path="summary" cssClass="alert alert-danger" element="div"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -228,3 +228,48 @@
     </div>
 </div>
 
+<script>
+    var inpFile = document.getElementById("inpFile");
+
+    inpFile.addEventListener("change", function () {
+        var previewContainer = document.getElementById("imagePreview");
+        var previewImage = previewContainer.querySelector(".image-preview__image");
+        var originCoverPhoto = document.getElementById("originPhoto");
+        console.log("Event");
+        var originPhoto = originCoverPhoto.getAttribute("value");
+
+        var file = this.files[0];
+
+        if (file) {
+            console.log("if");
+            var reader = new FileReader();
+            previewImage.style.display = "block";
+            reader.addEventListener("load", function () {
+                console.log(this.result);
+                previewImage.setAttribute("src", this.result);
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.style.display = null;
+            previewImage.setAttribute("src", originPhoto);
+        }
+    });
+
+
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    var maxDate = yyyy - 18 + '-' + mm + '-' + dd;
+    var minDate = yyyy - 90 + '-' + mm + '-' + dd;
+    document.getElementById("birth").setAttribute("min", minDate);
+    document.getElementById("birth").setAttribute("max", maxDate);
+</script>

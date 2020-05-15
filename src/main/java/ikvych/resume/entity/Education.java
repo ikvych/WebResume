@@ -1,11 +1,17 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.FirstFieldLessThanSecond;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "education")
+@FirstFieldLessThanSecond(first = "beginYear", second = "finishYear")
 public class Education implements Serializable {
 
     @Id
@@ -18,6 +24,9 @@ public class Education implements Serializable {
     private Profile profile;
 
     @Column(name = "summary", nullable = false, length = 100)
+    @NotNull
+    @NotBlank
+    @Size(max = 255)
     private String summary;
 
     @Column(name = "begin_year", nullable = false)
@@ -27,9 +36,15 @@ public class Education implements Serializable {
     private Integer finishYear;
 
     @Column(name = "university", length = 2147483647, nullable = false)
+    @NotNull
+    @NotBlank
+    @Size(max = 255)
     private String university;
 
     @Column(name = "faculty", nullable = false)
+    @NotNull
+    @NotBlank
+    @Size(max = 255)
     private String faculty;
 
     @Transient

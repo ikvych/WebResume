@@ -2,6 +2,7 @@ package ikvych.resume.config;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.sitemesh.content.tagrules.html.Sm2TagRuleBundle;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -29,6 +30,7 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
     }
 
     public void registerFilters(ServletContext servletContext, WebApplicationContext context) {
+        registerFilter(servletContext, new CharacterEncodingFilter("UTF-8", true));
         registerFilter(servletContext, buildConfigurableSiteMeshFilter(), "sitemesh");
         registerFilter(servletContext, new OpenEntityManagerInViewFilter());
     }
@@ -56,7 +58,8 @@ public class WebResumeApplicationInitializer implements WebApplicationInitialize
         return new ConfigurableSiteMeshFilter() {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-                builder.addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp");
+                builder.addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp")
+                        .addTagRuleBundle(new Sm2TagRuleBundle());
             }
         };
     }

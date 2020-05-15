@@ -1,6 +1,15 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.EnglishLanguage;
+import ikvych.resume.convertor.LanguageLevelAttributeConverter;
+import ikvych.resume.convertor.LanguageTypeAttributeConverter;
+import ikvych.resume.model.LanguageLevel;
+import ikvych.resume.model.LanguageType;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -17,13 +26,21 @@ public class Language implements Serializable {
     private Profile profile;
 
     @Column(name = "name", nullable = false, length = 30)
+    @NotNull
+    @NotBlank
+    @Size(max = 30)
+    @EnglishLanguage(withNumbers = false, withPunctuations = false, withSpechSymbols = false)
     private String name;
 
     @Column(name = "level", nullable = false, length = 18)
-    private String level;
+    @Convert(converter = LanguageLevelAttributeConverter.class)
+    @NotNull
+    private LanguageLevel level;
 
     @Column(name = "type", nullable = false, length = 7)
-    private String type;
+    @Convert(converter = LanguageTypeAttributeConverter.class)
+    @NotNull
+    private LanguageType type;
 
     public Long getId() {
         return id;
@@ -49,19 +66,19 @@ public class Language implements Serializable {
         this.name = name;
     }
 
-    public String getLevel() {
+    public LanguageLevel getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(LanguageLevel level) {
         this.level = level;
     }
 
-    public String getType() {
+    public LanguageType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(LanguageType type) {
         this.type = type;
     }
 }

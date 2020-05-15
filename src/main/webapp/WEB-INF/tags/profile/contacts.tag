@@ -31,20 +31,20 @@
                     </c:if>
                     <c:if test="${profile.contacts.linkedin != null}">
                         <div class="col-12 col-md-4">
-                            <a href="https://${profile.contacts.linkedin}"><h6><i class="fa fa-linkedin contacts"></i>
+                            <a href="${profile.contacts.linkedin}"><h6><i class="fa fa-linkedin contacts"></i>
                                     ${profile.contacts.linkedin} </h6></a>
                         </div>
                     </c:if>
                     <c:if test="${profile.contacts.github != null}">
                         <div class="col-12 col-md-4">
-                            <a href="https://${profile.contacts.github}">
+                            <a href="${profile.contacts.github}">
                                 <h6><i class="fa fa-github contacts"></i> ${profile.contacts.github} </h6>
                             </a>
                         </div>
                     </c:if>
                     <c:if test="${profile.contacts.stackoverflow != null}">
                         <div class="col-12 col-md-4">
-                            <a href="https://${profile.contacts.stackoverflow}">
+                            <a href="${profile.contacts.stackoverflow}">
                                 <h6><i class="fa fa-stack-overflow contacts"></i> ${profile.contacts.stackoverflow}
                                 </h6>
                             </a>
@@ -52,7 +52,7 @@
                     </c:if>
                     <c:if test="${profile.contacts.facebook != null}">
                         <div class="col-12 col-md-4">
-                            <a href="https://${profile.contacts.facebook}">
+                            <a href="${profile.contacts.facebook}">
                                 <h6><i class="fa fa-facebook contacts"></i> ${profile.contacts.facebook}</h6>
                             </a>
                         </div>

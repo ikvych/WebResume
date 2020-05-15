@@ -1,6 +1,10 @@
 package ikvych.resume.entity;
 
+import ikvych.resume.annotation.constraints.EnglishLanguage;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -17,9 +21,15 @@ public class Skill implements Serializable {
     private Profile profile;
 
     @Column(name = "category", nullable = false, length = 50)
+    @NotNull
+    @NotBlank
+    @EnglishLanguage
     private String category;
 
     @Column(name = "value", nullable = false, length = 2147483647)
+    @NotNull
+    @NotBlank
+    @EnglishLanguage
     private String value;
 
     public Long getId() {

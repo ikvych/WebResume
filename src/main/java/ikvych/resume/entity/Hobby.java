@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "hobby")
-public class Hobby implements Serializable {
+public class Hobby implements Serializable, Comparable<Hobby> {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,6 +19,29 @@ public class Hobby implements Serializable {
 
     @Column(name = "name", nullable = false, length = 30)
     private String name;
+
+    @Transient
+    private boolean selected;
+
+    public Hobby() {
+    }
+
+    public Hobby(String name) {
+        this.name = name;
+    }
+
+    public Hobby(String name, boolean selected) {
+        this.name = name;
+        this.selected = selected;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public Long getId() {
         return id;
@@ -42,5 +65,13 @@ public class Hobby implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Transient
+    public String getCssClassName() {return name.replace(" ", "-").toLowerCase();}
+
+    @Override
+    public int compareTo(Hobby hobby) {
+        return getName().compareTo(hobby.getName());
     }
 }

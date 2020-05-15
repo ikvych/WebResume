@@ -10,12 +10,15 @@
     <jsp:include page="../section/css.jsp" />
 </head>
 <body>
+<section class="container-xl container-fluid p-0">
 <jsp:include page="../section/header.jsp" />
+</section>
 <jsp:include page="../section/nav.jsp" />
-<section class="main">
+<section class="container-xl container-fluid p-0">
     <sitemesh:write property='body' />
 </section>
 <jsp:include page="../section/footer.jsp" />
 <jsp:include page="../section/js.jsp" />
+<sitemesh:write property='page.js-init' />
 </body>
 </html>

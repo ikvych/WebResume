@@ -3,6 +3,7 @@ package ikvych.resume.controller;
 import ikvych.resume.entity.Profile;
 import ikvych.resume.form.SignUpForm;
 import ikvych.resume.model.Constants;
+import ikvych.resume.service.EmailService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import ikvych.resume.service.EditProfileService;
@@ -37,6 +38,9 @@ public class PublicController {
 
     @Autowired
     private EditProfileService editProfileService;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(value = "/sign-in", method = RequestMethod.GET)
     public String getSignIn() {
@@ -103,5 +107,11 @@ public class PublicController {
             model.addAttribute("query", URLDecoder.decode(query, "UTF-8"));
             return "search-result";
         }
+    }
+
+    @RequestMapping(value = "/send", method = RequestMethod.GET)
+    private String sendMessage() {
+        emailService.sendMessage("ikvuch@gmail.com", "Test", "Test message");
+        return "message";
     }
 }

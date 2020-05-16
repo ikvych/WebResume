@@ -34,9 +34,19 @@ public class FindProfileServiceImpl implements FindProfileService {
     private ProfileSearchRepository profileSearchRepository;
 
     @Override
+    public Profile findProfileByEmail(String email) {
+        return profileRepository.findByEmail(email).orElseThrow(() -> {
+            String msg = String.format("Can't find profile with email: %s", email);
+            NoSuchEntityException ex = new NoSuchEntityException(msg);
+            LOGGER.error(msg, ex);
+            return ex;
+        });
+    }
+
+    @Override
     public Profile findProfileById(Long profileId) {
         return profileRepository.findById(profileId).orElseThrow(() -> {
-            String msg = String.format("Can't find profile with id: %s", profileId);
+            String msg = String.format("Can't find profile with id: %d", profileId);
             NoSuchEntityException ex = new NoSuchEntityException(msg);
             LOGGER.error(msg, ex);
             return ex;

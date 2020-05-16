@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface FindProfileService {
 
+    Profile findProfileByEmail(String email);
+
     Profile findProfileById(Long profileId);
 
     Profile findProfileByUid(String uid);

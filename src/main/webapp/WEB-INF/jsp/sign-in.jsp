@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-row d-flex justify-content-between">
                         <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="submit" class="btn btn-primary">Sign-in with Facebook</button>
+                        <a href="/fbLogin" type="submit" class="btn btn-primary">Sign-in with Facebook</a>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
-package ikvych.resume.repository;
+package ikvych.resume.repository.storage;
 
+import ikvych.resume.entity.Hobby;
 import ikvych.resume.entity.Language;
-import ikvych.resume.entity.Practical;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface LanguageRepository extends CrudRepository<Language, Long> {
+public interface HobbyRepository extends CrudRepository<Hobby, Long> {
 
-    Optional<List<Language>> findAllByProfileId(Long profileId);
+    Optional<List<Hobby>> findAllByProfileId(Long profileId);
 }

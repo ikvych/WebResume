@@ -1,5 +1,6 @@
 package ikvych.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ikvych.resume.annotation.constraints.EnglishLanguage;
 import ikvych.resume.convertor.LanguageLevelAttributeConverter;
 import ikvych.resume.convertor.LanguageTypeAttributeConverter;
@@ -23,6 +24,7 @@ public class Language implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", nullable = false)
+    @JsonIgnore
     private Profile profile;
 
     @Column(name = "name", nullable = false, length = 30)

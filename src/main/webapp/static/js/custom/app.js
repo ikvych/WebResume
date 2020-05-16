@@ -62,7 +62,7 @@ function showErrorDialog (message) {
     alert(message);
 }
 
-function moreProfiles () {
+function moreProfiles (searchQuery) {
     var page = parseInt($('#profileContainer').attr('data-profile-number')) + 1;
     var total= parseInt($('#profileContainer').attr('data-profile-total'));
     if (page >= total) {
@@ -71,9 +71,9 @@ function moreProfiles () {
         return;
     }
     var url = '/fragment/more?page=' + page;
-/*    if(searchQuery !== undefined && searchQuery.trim() !== '') {
+    if(searchQuery !== undefined && searchQuery.trim() !== '') {
         url += '&query='+searchQuery;
-    }*/
+    }
 
     $('#loadMoreContainer').css('display', 'none');
     $('#loadMoreIndicator').css('display', 'block');

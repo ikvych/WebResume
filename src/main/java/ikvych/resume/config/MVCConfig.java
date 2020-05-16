@@ -42,7 +42,7 @@ public class MVCConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
         registry.addResourceHandler("/media/**").addResourceLocations("/media/");
-        registry.addResourceHandler("/favicon.ico").addResourceLocations("/fav/favicon.ico");
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/favicon.ico");
     }
 
     @Bean

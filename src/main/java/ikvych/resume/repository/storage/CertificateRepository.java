@@ -1,4 +1,4 @@
-package ikvych.resume.repository;
+package ikvych.resume.repository.storage;
 
 import ikvych.resume.entity.Certificate;
 import ikvych.resume.entity.Course;

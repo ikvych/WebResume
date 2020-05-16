@@ -1,7 +1,9 @@
 package ikvych.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ikvych.resume.annotation.constraints.Adulthood;
 import ikvych.resume.annotation.constraints.Phone;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "profile")
+@Document(indexName = "profile")
 public class Profile implements Serializable {
 
     @Id
@@ -36,14 +39,17 @@ public class Profile implements Serializable {
     @Column(name = "birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Adulthood
+    @JsonIgnore
     private LocalDate birthDay;
 
     @Column(name = "phone", unique = true, length = 20)
     @Phone
+    @JsonIgnore
     private String phone;
 
     @Column(name = "email", unique = true, length = 100)
     @Email
+    @JsonIgnore
     private String email;
 
     @Column(name = "country", length = 60)
@@ -62,6 +68,7 @@ public class Profile implements Serializable {
 
     @Column(name = "large_photo")
     @Size(max=255)
+    @JsonIgnore
     private String largePhoto;
 
     @Column(name = "small_photo")
@@ -72,12 +79,15 @@ public class Profile implements Serializable {
     private String info;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "completed", nullable = false)
+    @JsonIgnore
     private boolean completed;
 
     @Column(name = "created", insertable = false)
+    @JsonIgnore
     private LocalDateTime created;
 
     @Embedded
@@ -91,28 +101,35 @@ public class Profile implements Serializable {
     private Contacts contacts;
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
     private List<Certificate> certificates = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("finishYear DESC, beginYear DESC, id DESC")
+    @JsonIgnore
     private List<Education> educations = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("name ASC")
+    @JsonIgnore
     private List<Hobby> hobbies = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
     private List<Language> languages = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("beginDate DESC")
+    @JsonIgnore
     private List<Practical> practicals = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("id ASC")
+    @JsonIgnore
     private List<Skill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     @Transient

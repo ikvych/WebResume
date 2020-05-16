@@ -3,6 +3,7 @@ package ikvych.resume.controller;
 import ikvych.resume.entity.Profile;
 import ikvych.resume.form.SignUpForm;
 import ikvych.resume.model.Constants;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import ikvych.resume.service.EditProfileService;
 import ikvych.resume.service.FindProfileService;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import static ikvych.resume.model.Constants.MAX_PROFILES_PER_PAGE;
 
@@ -74,10 +78,30 @@ public class PublicController {
 
     @RequestMapping(value = "/fragment/more", method = RequestMethod.GET)
     private String loadMoreFragment(Model model,
-                                   @RequestParam(value = "query", required = false) String query,
-                                   @PageableDefault(size = Constants.MAX_PROFILES_PER_PAGE) @SortDefault(sort = "id") Pageable pageable) {
-        Page<Profile> profiles = findProfileService.findAll(pageable);
+                                    @RequestParam(value = "query", required = false) String query,
+                                    @PageableDefault(size = Constants.MAX_PROFILES_PER_PAGE) @SortDefault(sort = "id") Pageable pageable) {
+        Page<Profile> profiles;
+        if (StringUtils.isNotBlank(query)) {
+            profiles = findProfileService.findAllBySearchQuery(query, pageable);
+        } else {
+            profiles = findProfileService.findAll(pageable);
+        }
         model.addAttribute("profiles", profiles.getContent());
         return "fragment/profile-list";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String search(Model model,
+                         @RequestParam(value = "query", required = false) String query,
+                         @PageableDefault(size = MAX_PROFILES_PER_PAGE) @SortDefault(sort = "id") Pageable pageable) throws UnsupportedEncodingException {
+        if (StringUtils.isBlank(query)) {
+            return "redirect:/welcome";
+        } else {
+            Page<Profile> profiles = findProfileService.findAllBySearchQuery(query, pageable);
+            model.addAttribute("profiles", profiles.getContent());
+            model.addAttribute("page", profiles);
+            model.addAttribute("query", URLDecoder.decode(query, "UTF-8"));
+            return "search-result";
+        }
     }
 }

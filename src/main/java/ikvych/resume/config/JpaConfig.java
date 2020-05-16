@@ -19,7 +19,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories("ikvych.resume.repository")
+@EnableJpaRepositories("ikvych.resume.repository.storage")
 public class JpaConfig {
 
     @Autowired

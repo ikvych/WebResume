@@ -1,20 +1,15 @@
 package ikvych.resume.controller;
 
 import ikvych.resume.entity.Profile;
-import ikvych.resume.model.CurrentUser;
 import ikvych.resume.model.CurrentUserImpl;
-import ikvych.resume.repository.ProfileRepository;
 import ikvych.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.time.LocalDateTime;
 
 @Controller
 public class ProfileController {

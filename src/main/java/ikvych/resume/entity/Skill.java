@@ -1,5 +1,6 @@
 package ikvych.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ikvych.resume.annotation.constraints.EnglishLanguage;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Skill implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", nullable = false)
+    @JsonIgnore
     private Profile profile;
 
     @Column(name = "category", nullable = false, length = 50)

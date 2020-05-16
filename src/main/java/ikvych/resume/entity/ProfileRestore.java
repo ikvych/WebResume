@@ -1,5 +1,7 @@
 package ikvych.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ public class ProfileRestore implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id", nullable = false)
+    @JsonIgnore
     private Profile profile;
 
     @Column(name = "token", nullable = false, unique = true)

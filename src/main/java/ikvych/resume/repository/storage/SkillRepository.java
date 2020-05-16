@@ -1,4 +1,4 @@
-package ikvych.resume.repository;
+package ikvych.resume.repository.storage;
 
 import ikvych.resume.entity.Practical;
 import ikvych.resume.entity.Skill;

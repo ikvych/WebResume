@@ -3,7 +3,7 @@ package ikvych.resume.service.impl;
 import ikvych.resume.entity.*;
 import ikvych.resume.exception.NoSuchEntityException;
 import ikvych.resume.form.SignUpForm;
-import ikvych.resume.repository.*;
+import ikvych.resume.repository.storage.*;
 import ikvych.resume.service.EditProfileService;
 import ikvych.resume.service.StaticDataService;
 import org.slf4j.Logger;

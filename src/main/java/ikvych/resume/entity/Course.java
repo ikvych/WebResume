@@ -1,5 +1,6 @@
 package ikvych.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ikvych.resume.annotation.constraints.FirstYearMonthBeforeSecondYearMonth;
 import ikvych.resume.convertor.YearMonthDateAttributeConverter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +25,7 @@ public class Course implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", nullable = false)
+    @JsonIgnore
     private Profile profile;
 
     @Column(name = "name", nullable = false, length = 60)
